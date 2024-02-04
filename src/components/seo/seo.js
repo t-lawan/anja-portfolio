@@ -18,8 +18,6 @@ const SEO = (props) => {
           }
         `
       )
-
-      console.log("SITE", site)
   return (
     <>
       <title>{props.title}</title>
