@@ -1,7 +1,6 @@
 import * as React from "react";
 import styled from "@emotion/styled";
-import { marquee_data, streaming_list } from "../../utils/data";
-import { DropdownText, ExternalLink } from "../../index.styles";
+import { marquee_data } from "../../utils/data";
 
 const MarqueeWrapper = styled.div`
   width: 100%;
@@ -22,26 +21,34 @@ const MarqueeText = styled.span`
       transform: translateX(-100%);
     }
   }
-  color: #FFFFED;
+  color: #ffffed;
   display: inline-block;
-  /* animation: marquee 20s linear infinite; */
+  animation: ${(props) =>
+    props.showAnim ? "long-shadow 2s ease-in-out" : "none"};
 
   :hover {
-    animation-play-state: paused;
-  /* backdrop-filter: blur(100px); */
+    /* animation-play-state: paused; */
+    /* backdrop-filter: blur(100px); */
   }
 `;
 
-
 const Marquee = () => {
-    const onClick = () => {
-        navigator.clipboard.writeText("info.anja.ngozi@gmail.com")
-    }
+  const [hasClicked, setHasClicked] = React.useState(false);
+
+  const onClick = () => {
+    navigator.clipboard.writeText("info.anja.ngozi@gmail.com");
+    setHasClicked(true);
+    setTimeout(() => {
+      setHasClicked(false);
+    }, 3000)
+  };
   return (
     <>
       {marquee_data.show ? (
-        <MarqueeWrapper onClick={onClick}>
-          <MarqueeText>{marquee_data.text}</MarqueeText>
+        <MarqueeWrapper>
+          <MarqueeText onClick={onClick} showAnim={hasClicked}>
+            {marquee_data.text}
+          </MarqueeText>
         </MarqueeWrapper>
       ) : null}
     </>
