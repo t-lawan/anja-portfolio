@@ -7,9 +7,9 @@ export const sideNavbarLinks = [
     url: "https://ngozii.bandcamp.com/",
   },
   {
-    title: "radio",
+    title: "contact",
     external: false,
-    url: "/radio",
+    url: "/contact",
   },
   {
     title: "mixes",
@@ -53,7 +53,7 @@ export const featured_work_list = [
 
 export const marquee_data = {
   show: true,
-  text: "Reach out at anja@email.com. Tap to copy the email address.",
+  text: "Reach out at info.anja.ngozi@gmail.com. Tap to copy the email address.",
 }
 
 export const mixes = [

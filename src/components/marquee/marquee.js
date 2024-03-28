@@ -10,6 +10,7 @@ const MarqueeWrapper = styled.div`
   position: absolute;
   bottom: 0;
   cursor: pointer;
+  padding: 1rem;
 `;
 
 const MarqueeText = styled.span`
@@ -23,7 +24,7 @@ const MarqueeText = styled.span`
   }
   color: #FFFFED;
   display: inline-block;
-  animation: marquee 20s linear infinite;
+  /* animation: marquee 20s linear infinite; */
 
   :hover {
     animation-play-state: paused;
@@ -34,7 +35,7 @@ const MarqueeText = styled.span`
 
 const Marquee = () => {
     const onClick = () => {
-        navigator.clipboard.writeText("anja@email.com")
+        navigator.clipboard.writeText("info.anja.ngozi@gmail.com")
     }
   return (
     <>
