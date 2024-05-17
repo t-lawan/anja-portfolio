@@ -4,7 +4,6 @@ import SEO from "../components/seo/seo";
 
 
 
-
 const XYZPage = () => {
   return (
     <Layout withSideBar={true}>

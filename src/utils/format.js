@@ -2,25 +2,25 @@ import moment from "moment";
 
 export const formatDate = (eventObject) => {
   // If there is no start date
-  if (!eventObject.start_date || !moment.isMoment(eventObject.start_date)) {
+  if (!eventObject.startDate || !moment.isMoment(eventObject.startDate)) {
     return "";
   }
 
   // If there is an end date
-  if (eventObject.end_date && moment.isMoment(eventObject.end_date)) {
+  if (eventObject.endDate && moment.isMoment(eventObject.endDate)) {
     //If start date and end date are in the same month
-    if (eventObject.start_date.month() === eventObject.end_date.month()) {
-      return `${eventObject.start_date.format(
+    if (eventObject.startDate.month() === eventObject.endDate.month()) {
+      return `${eventObject.startDate.format(
         "MMM D"
-      )} - ${eventObject.end_date.format("D")}`;
+      )} - ${eventObject.endDate.format("D")}`;
     } else {
-      return `${eventObject.start_date.format(
+      return `${eventObject.startDate.format(
         "MMM D"
-      )} - ${eventObject.end_date.format("MMM D")}`;
+      )} - ${eventObject.endDate.format("MMM D")}`;
     }
   }
 
-  return eventObject.start_date.format("MMM D");
+  return eventObject.startDate.format("MMM D");
 };
 
 

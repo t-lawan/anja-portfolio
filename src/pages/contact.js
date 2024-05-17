@@ -1,18 +1,33 @@
 import * as React from "react";
 import Layout from "../components/layout/layout";
 import SEO from "../components/seo/seo";
+import { useStaticQuery, graphql } from "gatsby";
+import { Transform } from "../utils/data";
 
-
-let description = "anja ngozi "
+let description = "anja ngozi ";
 
 const ContactPage = () => {
+  const item = Transform.contact(
+    useStaticQuery(
+      graphql`
+        {
+          contentfulWebsite {
+            contact {
+              contact
+            }
+          }
+        }
+      `
+    )
+  );
+
   return (
     <Layout withSideBar={true}>
-      <p> {description.repeat(40)} </p> 
+      <p> {item.contact} </p>
     </Layout>
   );
 };
 
 export default ContactPage;
 
-export const Head = () => <SEO title="Anja Ngozi" description="Anja Ngozi is a London based DJ, whose ecletic sets centre around soulful tunes, lo-fi beats and experimental waves."/>;
+export const Head = () => <SEO />;

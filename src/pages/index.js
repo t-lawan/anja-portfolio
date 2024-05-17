@@ -5,8 +5,8 @@ import SEO from "../components/seo/seo";
 
 
 
-
 const IndexPage = () => {
+
   return (
     <Layout withSideBar={false}>
       <Jumbotron />

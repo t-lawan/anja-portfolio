@@ -5,6 +5,7 @@ import wave from "./images/wave.png";
 import background from "./images/background.jpg";
 import { Link } from "gatsby";
 
+
 export const ExternalLink = styled.a`
   color: white;
   text-decoration: none;

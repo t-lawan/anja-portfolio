@@ -1,5 +1,85 @@
 import moment from "moment";
 
+
+export class Transform {
+    static events(data){
+      // Get array
+      data = data.allContentfulEvent.edges;
+
+      data = data.map((event) => {
+        return {
+          ...event.node,
+          description: event.node.description.description,
+          startDate: moment(event.node.startDate),
+          endDate: event.node.endDate ? moment(event.node.endDate) : null,
+        };
+      })
+      return data;
+    }
+
+    static streaming(data){
+      // Get array
+      data = data.contentfulWebsite.streaming;
+
+      data = data.map((event) => {
+        return {
+          ...event,
+          title: event.title.title,
+        };
+      })
+      return data;
+    }
+
+    static seo(data){
+      // Get array
+      data = { 
+        ...data.contentfulWebsite,
+        description: data.contentfulWebsite.description.description
+      }
+
+      return data;
+    }
+
+    static contact(data){
+      console.log(data)
+      // Get array
+      data = { 
+        ...data.contentfulWebsite,
+        contact: data.contentfulWebsite.contact.contact
+      }
+
+      return data;
+    }
+
+
+    static mixes(data){
+      // Get array
+      data = data.contentfulWebsite.mixes;
+
+      data = data.map((event) => {
+        return {
+          ...event
+        };
+      })
+      return data;
+    }
+
+    static featuredWork(data){
+      // Get array
+      data = data.contentfulWebsite.featuredWork;
+
+      data = data.map((event) => {
+        return {
+          ...event.node,
+          title: event.title.title,
+        };
+      })
+      return data;
+    }
+}
+
+
+
 export const sideNavbarLinks = [
   {
     title: "bandcamp",

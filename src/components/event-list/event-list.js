@@ -2,7 +2,6 @@ import * as React from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { formatDate, isInThePast } from "../../utils/format";
-import { data_events } from "../../utils/data";
 import { EventListType } from "../../utils/config";
 const EventListWrapper = styled.div``;
 const EventWrapper = styled.div`
@@ -41,7 +40,8 @@ const Heading = styled.p`
 `;
 
 const EventList = (props) => {
-  let events = data_events;
+  let events = props.events;
+  // events = data_events;
   const [open, setOpen] = React.useState(false);
   const toggleOpenState = () => {
     setOpen(!open);
@@ -50,13 +50,13 @@ const EventList = (props) => {
   switch(props.type) {
     case EventListType.UPCOMING: {
         events = events.filter((event) => {
-            return !isInThePast(event.start_date)
+            return !isInThePast(event.startDate)
         });
         break;
     }
     case EventListType.PAST: {
         events = events.filter((event) => {
-            return isInThePast(event.start_date)
+            return isInThePast(event.startDate)
         })
         break;
     }
@@ -66,8 +66,7 @@ const EventList = (props) => {
   }
 
   
-  events.sort((a, b) => b.start_date - a.start_date);
-
+  events.sort((a, b) => b.startDate - a.startDate);
   return (
     <EventListWrapper>
       <Heading onClick={toggleOpenState}>
@@ -83,7 +82,7 @@ const EventList = (props) => {
             <EventWrapper key={index}>
               <EventDate>{formatDate(event)}</EventDate>
               <EventTitle>{event.title}</EventTitle>
-              <EventText>{event.short_description}</EventText>
+              <EventText>{event.description}</EventText>
             </EventWrapper>
           ))}
         </>
@@ -94,6 +93,7 @@ const EventList = (props) => {
 
 EventList.propTypes = {
   type: PropTypes.string.isRequired,
+  events: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
 export default EventList;
