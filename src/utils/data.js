@@ -70,7 +70,7 @@ export class Transform {
 
       data = data.map((event) => {
         return {
-          ...event.node,
+          ...event,
           title: event.title.title,
         };
       })
