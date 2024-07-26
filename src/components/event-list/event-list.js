@@ -4,6 +4,8 @@ import styled from "@emotion/styled";
 import { formatDate, isInThePast } from "../../utils/format";
 import { EventListType } from "../../utils/config";
 import { ExternalLink } from "../../index.styles";
+import { Transform } from "../../utils/data";
+import { graphql, useStaticQuery } from "gatsby";
 const EventListWrapper = styled.div``;
 const EventWrapper = styled.div`
   margin-bottom: 1rem;
@@ -42,7 +44,24 @@ const Heading = styled.p`
 `;
 
 const EventList = (props) => {
-  let events = props.events;
+  // let events = props.events;
+  let events =  Transform.events(useStaticQuery(graphql`  {
+    allContentfulEvent {
+      edges {
+        node {
+          title
+          description {
+            description
+          }
+          link
+          venueName
+          venueLocation
+          startDate
+          endDate
+        }
+      }
+    }
+  }`));
   // events = data_events;
   const [open, setOpen] = React.useState(false);
   const toggleOpenState = () => {

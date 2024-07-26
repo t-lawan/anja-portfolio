@@ -16,6 +16,12 @@ export class Transform {
       })
       return data;
     }
+    static sideNavbarLinks(data){
+      data = data.contentfulWebsite.navbarItems;
+    
+      return data;
+    }
+
 
     static streaming(data){
       // Get array

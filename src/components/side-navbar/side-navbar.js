@@ -16,52 +16,97 @@ const SideNavbarWrapper = styled.div`
   height: 100vh;
   padding: 1rem;
   overflow-x: scroll;
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-  ::-webkit-scrollbar{
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  ::-webkit-scrollbar {
     display: none;
   }
 
   @media only screen and (max-width: ${size.tablet}) {
     height: auto;
-  } 
-
+  }
 `;
 
 const SideNavbar = () => {
-  const events =  Transform.events(useStaticQuery(graphql`  {
-    allContentfulEvent {
-      edges {
-        node {
-          title
-          description {
-            description
+  let navbarItems = Transform.sideNavbarLinks(
+    useStaticQuery(graphql`
+      {
+        contentfulWebsite {
+          navbarItems {
+            title
           }
-          link
-          venueName
-          venueLocation
-          startDate
-          endDate
         }
       }
-    }
-  }`));
+    `)
+  );
 
+  console.log(navbarItems);
+  const renderNavbarItem = (item, index) => {
+    let comp;
+    switch (item.title) {
+      case "BANDCAMP":
+        comp = (
+          <ExternalLink
+            key={index}
+            href="https://ngozii.bandcamp.com/"
+            target="__blank"
+          >
+            bandcamp
+          </ExternalLink>
+        );
+        break;
+      case "CONTACT":
+        comp = (
+          <InternalLink activeClassName="is_active" key={index} to={'/contact'}>
+          contact
+        </InternalLink>
+        );
+        break;
+      case "MIXES":
+        comp = (
+          <InternalLink activeClassName="is_active" key={index} to={'/mixes'}>
+          mixes
+        </InternalLink>
+        );
+        break;
+      case "SIBIN":
+        comp = (
+          <ExternalLink
+            key={index}
+            href="https://sibin.bandcamp.com/music"
+            target="__blank"
+          >
+            sibin
+          </ExternalLink>
+        );
+        break;
+      case "UPCOMING_EVENTS":
+        comp = <EventList type={EventListType.UPCOMING} />;
+        break;
+      case "PAST_EVENTS":
+        comp = <EventList type={EventListType.PAST} />;
+        break;
+      case "STREAMING":
+        comp = <Streaming />;
+        break;
+      case "FEATURED_WORK":
+        comp = <FeaturedWork />;
+        break;
+    }
+
+    return comp;
+  };
 
   return (
     <SideNavbarWrapper>
-      <InternalLink activeClassName="is_active" to="/xyz"> xyz </InternalLink>
-      {sideNavbarLinks.map((link, index) => link.external ?( 
-        <ExternalLink key={index} href={link.url} target="__blank">
-          {" "}
-          {link.title}{" "}
-        </ExternalLink>
-      ) : (<InternalLink activeClassName="is_active" key={index} to={link.url}> {link.title} </InternalLink>))}
+      <InternalLink activeClassName="is_active" to="/xyz">
+        {" "}
+        xyz{" "}
+      </InternalLink>
 
-      <EventList events={events} type={EventListType.UPCOMING} />
-      <EventList events={events} type={EventListType.PAST} />
-      <FeaturedWork /> 
-      <Streaming />
+      {navbarItems.map((item, index) => (
+        <>{renderNavbarItem(item, index)}</>
+      ))}
     </SideNavbarWrapper>
   );
 };
