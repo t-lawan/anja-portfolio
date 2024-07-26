@@ -34,7 +34,8 @@ export class Transform {
       // Get array
       data = { 
         ...data.contentfulWebsite,
-        description: data.contentfulWebsite.description.description
+        description: data.contentfulWebsite.description.description,
+        image: data.contentfulWebsite.image.url
       }
 
       return data;

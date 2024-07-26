@@ -37,6 +37,7 @@ const SideNavbar = () => {
           description {
             description
           }
+          link
           venueName
           venueLocation
           startDate
