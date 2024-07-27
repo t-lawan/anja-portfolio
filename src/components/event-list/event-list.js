@@ -86,8 +86,6 @@ const EventList = (props) => {
     }
   }
 
-  console.log(events);
-
   events.sort((a, b) => b.startDate - a.startDate);
   return (
     <EventListWrapper>

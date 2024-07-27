@@ -39,8 +39,6 @@ const SideNavbar = () => {
       }
     `)
   );
-
-  console.log(navbarItems);
   const renderNavbarItem = (item, index) => {
     let comp;
     switch (item.title) {

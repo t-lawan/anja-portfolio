@@ -48,7 +48,6 @@ export class Transform {
     }
 
     static contact(data){
-      console.log(data)
       // Get array
       data = { 
         ...data.contentfulWebsite,
