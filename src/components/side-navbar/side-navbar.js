@@ -7,6 +7,7 @@ import FeaturedWork from "../featured-work/featured-work";
 import { ExternalLink, InternalLink, size } from "../../index.styles";
 import Streaming from "../streaming/streaming";
 import { graphql, useStaticQuery } from "gatsby";
+import { Cross as Hamburger } from "hamburger-react";
 
 const SideNavbarWrapper = styled.div`
   background-color: transparent;
@@ -28,6 +29,20 @@ const SideNavbarWrapper = styled.div`
 `;
 
 const SideNavbar = () => {
+  const [isOpen, setOpen] = React.useState(false);
+  const [isTabletOrLess, setIsTabletOrLess] = React.useState(
+    window.innerWidth <= 768
+  );
+
+  React.useEffect(() => {
+    const handleResize = () => {
+      setIsTabletOrLess(window.innerWidth <= 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   let navbarItems = Transform.sideNavbarLinks(
     useStaticQuery(graphql`
       {
@@ -55,16 +70,16 @@ const SideNavbar = () => {
         break;
       case "CONTACT":
         comp = (
-          <InternalLink activeClassName="is_active" key={index} to={'/contact'}>
-          contact
-        </InternalLink>
+          <InternalLink activeClassName="is_active" key={index} to={"/contact"}>
+            contact
+          </InternalLink>
         );
         break;
       case "MIXES":
         comp = (
-          <InternalLink activeClassName="is_active" key={index} to={'/mixes'}>
-          mixes
-        </InternalLink>
+          <InternalLink activeClassName="is_active" key={index} to={"/mixes"}>
+            mixes
+          </InternalLink>
         );
         break;
       case "SIBIN":
@@ -97,14 +112,26 @@ const SideNavbar = () => {
 
   return (
     <SideNavbarWrapper>
-      <InternalLink activeClassName="is_active" to="/xyz">
-        {" "}
-        xyz{" "}
-      </InternalLink>
+      {isTabletOrLess && (
+        <Hamburger
+          size={20}
+          direction="right"
+          toggled={isOpen}
+          toggle={setOpen}
+        />
+      )}
 
-      {navbarItems.map((item, index) => (
-        <>{renderNavbarItem(item, index)}</>
-      ))}
+      {isOpen ||
+        (!isTabletOrLess && (
+          <>
+            <InternalLink activeClassName="is_active" to="/xyz">
+              anja ngozi
+            </InternalLink>
+            {navbarItems.map((item, index) => (
+              <>{renderNavbarItem(item, index)}</>
+            ))}
+          </>
+        ))}
     </SideNavbarWrapper>
   );
 };
