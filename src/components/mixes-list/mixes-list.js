@@ -13,7 +13,7 @@ const MixesListWrapper = styled.div`
   grid-template-columns: repeat(4, 1fr);
   animation: shadow 10s linear infinite alternate;
   @media only screen and (max-width: ${size.tablet}) {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
   /* justify-content: center; */
   /* align-items: center; */
@@ -21,9 +21,9 @@ const MixesListWrapper = styled.div`
 
 const StyledPlayer = styled(ReactPlayer)`
   width: 100%;
-`;
-const MixesListText = styled.h1`
-  color: white;
+  @media only screen and (max-width: ${size.tablet}) {
+    height: auto !important;
+  }
 `;
 
 const MixWrapper = styled.div`
