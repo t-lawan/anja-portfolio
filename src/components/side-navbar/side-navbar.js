@@ -8,7 +8,6 @@ import { ExternalLink, InternalLink, size } from "../../index.styles";
 import Streaming from "../streaming/streaming";
 import { graphql, useStaticQuery } from "gatsby";
 import { Cross as Hamburger } from "hamburger-react";
-import { render } from "react-dom";
 
 const SideNavbarWrapper = styled.div`
   background-color: transparent;
@@ -36,9 +35,23 @@ const NavbarItemsWrapper = styled.div`
   }
 `;
 
+const HamburgerWrapper = styled.div`
+  background: ${(props) => props.$show ? `rgba(0, 0, 0, 0.5)` : 'none'};
+  width: 100%;
+`;
+
+const MobileNavbarItemsWrapper = styled.div`
+  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 200;
+`;
+
 const ShowInTabletOrLess = styled.div`
   display: none;
   @media only screen and (max-width: ${size.tablet}) {
+    width: 100%;
     display: block;
   }
 `;
@@ -142,17 +155,22 @@ const SideNavbar = () => {
   return (
     <SideNavbarWrapper>
       <ShowInTabletOrLess>
-        <Hamburger
-          size={20}
-          direction="right"
-          toggled={isOpen}
-          toggle={toggleOpen}
-        />
-        {isOpen && renderNavbarLinks()}
+        <HamburgerWrapper $show={isOpen}>
+          <Hamburger
+            size={20}
+            direction="right"
+            toggled={isOpen}
+            toggle={toggleOpen}
+          />
+        </HamburgerWrapper>
+
+        {isOpen && (
+          <MobileNavbarItemsWrapper>
+            {renderNavbarLinks()}
+          </MobileNavbarItemsWrapper>
+        )}
       </ShowInTabletOrLess>
-      <ShowInDesktopOnly>
-        {renderNavbarLinks()}
-      </ShowInDesktopOnly>
+      <ShowInDesktopOnly>{renderNavbarLinks()}</ShowInDesktopOnly>
     </SideNavbarWrapper>
   );
 };
