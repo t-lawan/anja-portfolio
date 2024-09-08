@@ -37,7 +37,7 @@ const Layout = (props) => {
       ) : (
         mainSection
       )}
-      {/* <Marquee /> */}
+      <Marquee />
     </LayoutWrapper>
   );
 };

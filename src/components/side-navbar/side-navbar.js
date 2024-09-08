@@ -25,6 +25,13 @@ const SideNavbarWrapper = styled.div`
 
   @media only screen and (max-width: ${size.tablet}) {
     height: auto;
+    padding: 0;
+  }
+`;
+
+const NavbarItemsWrapper = styled.div`
+  @media only screen and (max-width: ${size.tablet}) {
+    padding: 1rem;
   }
 `;
 
@@ -110,6 +117,10 @@ const SideNavbar = () => {
     return comp;
   };
 
+  const toggleOpen = (toggleState) => {
+    setOpen(toggleState);
+  };
+
   return (
     <SideNavbarWrapper>
       {isTabletOrLess && (
@@ -117,21 +128,22 @@ const SideNavbar = () => {
           size={20}
           direction="right"
           toggled={isOpen}
-          toggle={setOpen}
+          toggle={toggleOpen}
         />
       )}
 
-      {isOpen ||
-        (!isTabletOrLess && (
-          <>
+      {(isOpen || !isTabletOrLess) && (
+        <>
+          <NavbarItemsWrapper>
             <InternalLink activeClassName="is_active" to="/xyz">
               anja ngozi
             </InternalLink>
             {navbarItems.map((item, index) => (
               <>{renderNavbarItem(item, index)}</>
             ))}
-          </>
-        ))}
+          </NavbarItemsWrapper>
+        </>
+      )}
     </SideNavbarWrapper>
   );
 };

@@ -9,7 +9,7 @@ const MarqueeWrapper = styled.div`
   position: absolute;
   bottom: 0;
   cursor: pointer;
-  padding: 1rem;
+  padding: 0 1rem;
 `;
 
 const MarqueeText = styled.span`
@@ -24,19 +24,28 @@ const MarqueeText = styled.span`
   color: #ffffed;
   display: inline-block;
   animation: ${(props) =>
-    props.showAnim ? "long-shadow 2s ease-in-out" : "none"};
+    props.showAnim ? "long-shadow 2s ease-in-out" : props.moveMarquee ? "marquee 1s linear infinite" : 'none'};
 
   :hover {
-    /* animation-play-state: paused; */
+    animation-play-state: paused;
     /* backdrop-filter: blur(100px); */
   }
 `;
 
 const Marquee = () => {
   const [hasClicked, setHasClicked] = React.useState(false);
+  const [moveMarquee, setMoveMarquee] = React.useState(false);
+
+  const calculateMoveMarquee = () => {
+    const value = Math.random() >= 0.95;
+    setMoveMarquee(value);
+  }
+
 
   const onClick = () => {
     navigator.clipboard.writeText("info.anja.ngozi@gmail.com");
+    calculateMoveMarquee()
+    
     setHasClicked(true);
     setTimeout(() => {
       setHasClicked(false);
@@ -46,7 +55,7 @@ const Marquee = () => {
     <>
       {marquee_data.show ? (
         <MarqueeWrapper>
-          <MarqueeText onClick={onClick} showAnim={hasClicked}>
+          <MarqueeText onClick={onClick} showAnim={hasClicked} moveMarquee={moveMarquee}>
             {marquee_data.text}
           </MarqueeText>
         </MarqueeWrapper>

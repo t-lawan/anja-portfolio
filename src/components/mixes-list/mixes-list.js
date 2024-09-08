@@ -4,11 +4,13 @@ import { Transform } from "../../utils/data";
 import { getMixCloudUrl } from "../../utils/format";
 import { graphql, useStaticQuery } from "gatsby";
 import { size } from "../../index.styles";
+import ReactPlayer from "react-player";
 
 const MixesListWrapper = styled.div`
   width: 100%;
+  max-width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(4, 1fr);
   animation: shadow 10s linear infinite alternate;
   @media only screen and (max-width: ${size.tablet}) {
     grid-template-columns: 1fr;
@@ -17,6 +19,9 @@ const MixesListWrapper = styled.div`
   /* align-items: center; */
 `;
 
+const StyledPlayer = styled(ReactPlayer)`
+  width: 100%;
+`;
 const MixesListText = styled.h1`
   color: white;
 `;
@@ -31,7 +36,7 @@ const MixesList = () => {
       {
         contentfulWebsite {
           mixes {
-            mixcloudId
+            url
             title
           }
         }
@@ -43,13 +48,38 @@ const MixesList = () => {
     <MixesListWrapper>
       {mixes.map((mix, index) => (
         <MixWrapper key={index}>
-          <iframe
+          <StyledPlayer
             key={index}
-            width="100%"
-            height="60"
-            src={getMixCloudUrl(mix.mixcloudId)}
-            frameBorder="0"
-          ></iframe>
+            width={"100%"}
+            url={mix.url}
+            config={{
+              mixcloud: {
+                options: {
+                  hide_cover: false,
+                  mini: false,
+                  light: false
+                },
+              },
+              soundcloud: {
+                options: {
+                  show_artwork: true,
+                  show_comments: false,
+                  show_playcount: true,
+                  show_user: true,
+                  show_reposts: false,
+                  visual: false,
+                  color: "#ff5500",
+                },
+              },
+              youtube: {
+                playerVars: {
+                  showinfo: 1,
+                  color: "white",
+                  theme: "light",
+                },
+              },
+            }}
+          />
         </MixWrapper>
       ))}
     </MixesListWrapper>
