@@ -41,7 +41,7 @@ const HamburgerWrapper = styled.div`
 `;
 
 const MobileNavbarItemsWrapper = styled.div`
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.7);
   width: 100%;
   height: 100%;
   position: absolute;
