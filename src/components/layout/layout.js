@@ -8,6 +8,9 @@ import Marquee from "../marquee/marquee";
 
 const MainWrapper = styled.main`
   padding: 1rem;
+  @media only screen and (max-width: ${size.tablet}) {
+    padding: 0.5rem;
+  } 
 `;
 
 const LayoutWrapper = styled.div`

@@ -8,6 +8,7 @@ import { ExternalLink, InternalLink, size } from "../../index.styles";
 import Streaming from "../streaming/streaming";
 import { graphql, useStaticQuery } from "gatsby";
 import { Cross as Hamburger } from "hamburger-react";
+import { render } from "react-dom";
 
 const SideNavbarWrapper = styled.div`
   background-color: transparent;
@@ -35,20 +36,22 @@ const NavbarItemsWrapper = styled.div`
   }
 `;
 
+const ShowInTabletOrLess = styled.div`
+  display: none;
+  @media only screen and (max-width: ${size.tablet}) {
+    display: block;
+  }
+`;
+
+const ShowInDesktopOnly = styled.div`
+  display: block;
+  @media only screen and (max-width: ${size.tablet}) {
+    display: none;
+  }
+`;
+
 const SideNavbar = () => {
   const [isOpen, setOpen] = React.useState(false);
-  const [isTabletOrLess, setIsTabletOrLess] = React.useState(
-    window.innerWidth <= 768
-  );
-
-  React.useEffect(() => {
-    const handleResize = () => {
-      setIsTabletOrLess(window.innerWidth <= 768);
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   let navbarItems = Transform.sideNavbarLinks(
     useStaticQuery(graphql`
@@ -121,29 +124,35 @@ const SideNavbar = () => {
     setOpen(toggleState);
   };
 
+  const renderNavbarLinks = () => {
+    return (
+      <>
+        <NavbarItemsWrapper>
+          <InternalLink activeClassName="is_active" to="/xyz">
+            anja ngozi
+          </InternalLink>
+          {navbarItems.map((item, index) => (
+            <>{renderNavbarItem(item, index)}</>
+          ))}
+        </NavbarItemsWrapper>
+      </>
+    );
+  };
+
   return (
     <SideNavbarWrapper>
-      {isTabletOrLess && (
+      <ShowInTabletOrLess>
         <Hamburger
           size={20}
           direction="right"
           toggled={isOpen}
           toggle={toggleOpen}
         />
-      )}
-
-      {(isOpen || !isTabletOrLess) && (
-        <>
-          <NavbarItemsWrapper>
-            <InternalLink activeClassName="is_active" to="/xyz">
-              anja ngozi
-            </InternalLink>
-            {navbarItems.map((item, index) => (
-              <>{renderNavbarItem(item, index)}</>
-            ))}
-          </NavbarItemsWrapper>
-        </>
-      )}
+        {isOpen && renderNavbarLinks()}
+      </ShowInTabletOrLess>
+      <ShowInDesktopOnly>
+        {renderNavbarLinks()}
+      </ShowInDesktopOnly>
     </SideNavbarWrapper>
   );
 };
