@@ -31,7 +31,6 @@ const Layout = (props) => {
   return (
     <LayoutWrapper>
       <GlobalStyles />
-      {/* <Header /> */}
       {props.withSideBar ? (
         <TwoColumnWrapper>
           <SideNavbar />

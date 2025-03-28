@@ -3,6 +3,7 @@ import Layout from "../components/layout/layout";
 import SEO from "../components/seo/seo";
 import { useStaticQuery, graphql } from "gatsby";
 import { Transform } from "../utils/data";
+import ContactForm from "../components/form/contact-form";
 
 let description = "anja ngozi ";
 
@@ -23,7 +24,7 @@ const ContactPage = () => {
 
   return (
     <Layout withSideBar={true}>
-      <p> {item.contact} </p>
+      <ContactForm />
     </Layout>
   );
 };

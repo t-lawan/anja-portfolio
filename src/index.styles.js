@@ -61,7 +61,6 @@ const styles = css`
   }
   html,
   body {
-    width: 100vw;
     width: 100%;
     height: 100%;
     margin: 0 auto;
@@ -76,7 +75,8 @@ const styles = css`
     background: "white";
     background-image: url(${background});
     background-repeat: round;
-    background-color: black;
+    width: 100%;
+    /* background-color: black; */
   }
   h1,
   h2,
@@ -148,7 +148,7 @@ const styles = css`
     padding-left: 0;
     padding-right: 0;
     padding-top: 0;
-    font-size: 1.15em;
+    font-size: 1.3rem;
   }
   li {
     list-style-type: lower-roman;

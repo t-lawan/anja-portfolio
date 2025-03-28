@@ -16,12 +16,8 @@ const SideNavbarWrapper = styled.div`
   align-items: flex-start;
   height: 100vh;
   padding: 1rem;
-  overflow-x: scroll;
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-  ::-webkit-scrollbar {
-    display: none;
-  }
+
+  overflow: hidden;
 
   @media only screen and (max-width: ${size.tablet}) {
     height: auto;
@@ -30,13 +26,21 @@ const SideNavbarWrapper = styled.div`
 `;
 
 const NavbarItemsWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 2rem;
   @media only screen and (max-width: ${size.tablet}) {
     padding: 1rem;
+    gap: 0.5rem;
   }
 `;
 
 const HamburgerWrapper = styled.div`
-  background: ${(props) => props.$show ? `rgba(0, 0, 0, 0.5)` : 'none'};
+  background: ${(props) => (props.$show ? `rgba(0, 0, 0, 0.5)` : "none")};
   width: 100%;
 `;
 
@@ -58,8 +62,10 @@ const ShowInTabletOrLess = styled.div`
 
 const ShowInDesktopOnly = styled.div`
   display: block;
+  height: 100%;
+  width: 100%;
   @media only screen and (max-width: ${size.tablet}) {
-    display: none;
+    /* display: none; */
   }
 `;
 
@@ -77,56 +83,63 @@ const SideNavbar = () => {
       }
     `)
   );
+
+  const StyledExternalLink = styled(ExternalLink)`
+    font-size: 2rem;
+  `;
+  const StyledInternalLink = styled(InternalLink)`
+    font-size: 2rem;
+  `;
   const renderNavbarItem = (item, index) => {
     let comp;
     switch (item.title) {
       case "BANDCAMP":
         comp = (
-          <ExternalLink
+          <StyledExternalLink
             key={index}
             href="https://ngozii.bandcamp.com/"
             target="__blank"
           >
             bandcamp
-          </ExternalLink>
+          </StyledExternalLink>
         );
         break;
       case "CONTACT":
         comp = (
-          <InternalLink activeClassName="is_active" key={index} to={"/contact"}>
+          <StyledInternalLink activeClassName="is_active" key={index} to={"/contact"}>
             contact
-          </InternalLink>
+          </StyledInternalLink>
         );
         break;
       case "MIXES":
         comp = (
-          <InternalLink activeClassName="is_active" key={index} to={"/mixes"}>
+          <StyledInternalLink activeClassName="is_active" key={index} to={"/mixes"}>
             mixes
-          </InternalLink>
+          </StyledInternalLink>
         );
         break;
       case "SIBIN":
         comp = (
-          <ExternalLink
+          <StyledExternalLink
             key={index}
             href="https://sibin.bandcamp.com/music"
             target="__blank"
           >
             sibin
-          </ExternalLink>
+          </StyledExternalLink>
         );
         break;
       case "UPCOMING_EVENTS":
-        comp = <EventList type={EventListType.UPCOMING} />;
+        comp = <EventList key={index} type={EventListType.UPCOMING} />;
         break;
       case "PAST_EVENTS":
-        comp = <EventList type={EventListType.PAST} />;
+        comp = <EventList key={index} type={EventListType.PAST} />;
         break;
       case "STREAMING":
-        comp = <Streaming />;
+        comp = <Streaming key={index} />;
         break;
       case "FEATURED_WORK":
-        comp = <FeaturedWork />;
+        comp = <FeaturedWork key={index}/>;
         break;
     }
 
@@ -141,9 +154,9 @@ const SideNavbar = () => {
     return (
       <>
         <NavbarItemsWrapper>
-          <InternalLink activeClassName="is_active" to="/xyz">
+          <StyledInternalLink activeClassName="is_active" to="/xyz">
             anja ngozi
-          </InternalLink>
+          </StyledInternalLink>
           {navbarItems.map((item, index) => (
             <>{renderNavbarItem(item, index)}</>
           ))}
@@ -154,8 +167,8 @@ const SideNavbar = () => {
 
   return (
     <SideNavbarWrapper>
-      <ShowInTabletOrLess>
-        <HamburgerWrapper $show={isOpen}>
+      <ShowInDesktopOnly>
+        <HamburgerWrapper>
           <Hamburger
             size={20}
             direction="right"
@@ -164,13 +177,8 @@ const SideNavbar = () => {
           />
         </HamburgerWrapper>
 
-        {isOpen && (
-          <MobileNavbarItemsWrapper>
-            {renderNavbarLinks()}
-          </MobileNavbarItemsWrapper>
-        )}
-      </ShowInTabletOrLess>
-      <ShowInDesktopOnly>{renderNavbarLinks()}</ShowInDesktopOnly>
+        {isOpen && renderNavbarLinks()}
+      </ShowInDesktopOnly>
     </SideNavbarWrapper>
   );
 };

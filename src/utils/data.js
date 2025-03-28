@@ -70,6 +70,12 @@ export class Transform {
       return data;
     }
 
+    static homePageImage(data){
+      // Get array
+      data = data.contentfulWebsite.image;
+      return data;
+    }
+
     static featuredWork(data){
       // Get array
       data = data.contentfulWebsite.featuredWork;
