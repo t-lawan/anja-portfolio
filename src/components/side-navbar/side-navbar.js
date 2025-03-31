@@ -14,7 +14,7 @@ const SideNavbarWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  height: 100vh;
+  /* height: 100vh; */
   padding: 1rem;
 
   overflow: hidden;
@@ -86,9 +86,15 @@ const SideNavbar = () => {
 
   const StyledExternalLink = styled(ExternalLink)`
     font-size: 2rem;
+    @media only screen and (max-width: ${size.tablet}) {
+      font-size: 1.5rem;
+    }
   `;
   const StyledInternalLink = styled(InternalLink)`
     font-size: 2rem;
+    @media only screen and (max-width: ${size.tablet}) {
+      font-size: 1.5rem;
+    }
   `;
   const renderNavbarItem = (item, index) => {
     let comp;
@@ -106,14 +112,22 @@ const SideNavbar = () => {
         break;
       case "CONTACT":
         comp = (
-          <StyledInternalLink activeClassName="is_active" key={index} to={"/contact"}>
+          <StyledInternalLink
+            activeClassName="is_active"
+            key={index}
+            to={"/contact"}
+          >
             contact
           </StyledInternalLink>
         );
         break;
       case "MIXES":
         comp = (
-          <StyledInternalLink activeClassName="is_active" key={index} to={"/mixes"}>
+          <StyledInternalLink
+            activeClassName="is_active"
+            key={index}
+            to={"/mixes"}
+          >
             mixes
           </StyledInternalLink>
         );
@@ -139,7 +153,7 @@ const SideNavbar = () => {
         comp = <Streaming key={index} />;
         break;
       case "FEATURED_WORK":
-        comp = <FeaturedWork key={index}/>;
+        comp = <FeaturedWork key={index} />;
         break;
     }
 
