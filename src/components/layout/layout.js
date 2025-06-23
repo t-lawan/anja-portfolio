@@ -9,6 +9,7 @@ import Marquee from "../marquee/marquee";
 const MainWrapper = styled.main`
   padding: 1rem;
   width: 100%;
+  height: calc(100vh - 4rem); /* Adjusting for header height */
   @media only screen and (max-width: ${size.tablet}) {
     padding: 0.5rem;
   } 
