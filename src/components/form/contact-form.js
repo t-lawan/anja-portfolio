@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 
-const FormContainer = styled.div`
+const FormContainer = styled.form`
   width: 100%;
   height: 100%;
   display: flex;
@@ -44,11 +44,13 @@ const Button = styled.button`
 
 const ContactForm = () => {
   return (
-    <FormContainer>
-      <Input type="text" placeholder="email" />
-      <Input type="text" placeholder="name" />
-      <Input type="text" placeholder="message" />
-      <Button>send</Button>
+    <FormContainer method="POST" data-netlify="true">
+        <input type="hidden" name="form-name" value="contact" />
+        <Input type="text" placeholder="email" />
+        <Input type="text" placeholder="name" />
+        <Input type="text" placeholder="message" />
+        <Button type="submit">send</Button>
+
     </FormContainer>
   );
 };
