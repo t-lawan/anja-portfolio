@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "@emotion/styled";
+import { size } from "../../index.styles";
 
 
 const ContactFormWrapper = styled.div`
@@ -10,6 +11,7 @@ const ContactFormWrapper = styled.div`
     flex-direction: column;
   align-items: center;
   justify-content: center;
+  
   `;
 
 
@@ -38,6 +40,10 @@ const Input = styled.input`
   &::placeholder {
     color: rgba(255, 255, 255, 0.7);
   }
+
+  @media only screen and (max-width: ${size.tablet}) {
+   width:80%;
+  } 
 `;
 
 const Textarea = styled.textarea`
@@ -49,6 +55,9 @@ const Textarea = styled.textarea`
   margin: 0.5rem 0;
   padding: 0.5rem;
   width:50%;
+    @media only screen and (max-width: ${size.tablet}) {
+   width:80%;
+  } 
 
 `;
 
