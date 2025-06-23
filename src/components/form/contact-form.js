@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
-
+import { navigate } from "gatsby";
 const FormContainer = styled.form`
   width: 100%;
   height: 100%;
@@ -55,8 +55,7 @@ const ContactForm = () => {
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: new URLSearchParams(formData).toString()
     })
-      .then(() => navigate("/thank-you/"))
-      .catch(error => alert(error));
+      .catch(error => console.log(error));
   };
   
   return (
