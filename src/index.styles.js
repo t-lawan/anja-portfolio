@@ -83,7 +83,7 @@ const styles = css`
   h3,
   h4,
   h5,
-  h6 {
+  h6{
     font-family: "Exo", sans-serif !important;
     margin-left: 0;
     margin-right: 0;
@@ -139,7 +139,7 @@ const styles = css`
     margin-bottom: 1.45rem;
   }
   p,
-  a {
+  a, input, textarea, button {
     margin-left: 0;
     margin-right: 0;
     margin-top: 0;
@@ -149,6 +149,7 @@ const styles = css`
     padding-right: 0;
     padding-top: 0;
     font-size: 1.3rem;
+    font-family: "Averia Libre", cursive !important;
   }
   li {
     list-style-type: lower-roman;

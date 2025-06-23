@@ -85,16 +85,16 @@ const SideNavbar = () => {
   );
 
   const StyledExternalLink = styled(ExternalLink)`
-    font-size: 2rem;
-    @media only screen and (max-width: ${size.tablet}) {
-      font-size: 1.5rem;
-    }
+    // font-size: 2rem;
+    // @media only screen and (max-width: ${size.tablet}) {
+    //   font-size: 1.5rem;
+    // }
   `;
   const StyledInternalLink = styled(InternalLink)`
-    font-size: 2rem;
-    @media only screen and (max-width: ${size.tablet}) {
-      font-size: 1.5rem;
-    }
+    // font-size: 2rem;
+    // @media only screen and (max-width: ${size.tablet}) {
+    //   font-size: 1.5rem;
+    // }
   `;
   const renderNavbarItem = (item, index) => {
     let comp;
