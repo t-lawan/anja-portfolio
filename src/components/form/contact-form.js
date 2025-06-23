@@ -59,7 +59,7 @@ const ContactForm = () => {
   };
   
   return (
-    <FormContainer name="contact" method="POST" data-netlify="true" action="/xyz" onSubmit={handleSubmit} >
+    <FormContainer name="contact" method="POST" data-netlify="true" onSubmit={handleSubmit} >
         <Input name="email" type="email" placeholder="email" />
         <Input name="name" type="text" placeholder="name" />
         <Input name="message" type="text" placeholder="message" />
