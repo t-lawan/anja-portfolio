@@ -43,9 +43,25 @@ const Button = styled.button`
 `;
 
 const ContactForm = () => {
+
+  const handleSubmit = event => {
+    event.preventDefault();
+  
+    const myForm = event.target;
+    const formData = new FormData(myForm);
+  
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams(formData).toString()
+    })
+      .then(() => navigate("/thank-you/"))
+      .catch(error => alert(error));
+  };
+  
   return (
-    <FormContainer name="contact" method="POST" data-netlify="true" action="/xyz">
-        <Input name="email" type="text" placeholder="email" />
+    <FormContainer name="contact" method="POST" data-netlify="true" action="/xyz" onSubmit={handleSubmit} >
+        <Input name="email" type="email" placeholder="email" />
         <Input name="name" type="text" placeholder="name" />
         <Input name="message" type="text" placeholder="message" />
         <Button type="submit">send</Button>
