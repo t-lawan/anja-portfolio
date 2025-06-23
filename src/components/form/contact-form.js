@@ -44,11 +44,10 @@ const Button = styled.button`
 
 const ContactForm = () => {
   return (
-    <FormContainer method="POST" data-netlify="true">
-        <input type="hidden" name="form-name" value="contact" />
-        <Input type="text" placeholder="email" />
-        <Input type="text" placeholder="name" />
-        <Input type="text" placeholder="message" />
+    <FormContainer name="contact" method="POST" data-netlify="true" action="/xyz">
+        <Input name="email" type="text" placeholder="email" />
+        <Input name="name" type="text" placeholder="name" />
+        <Input name="message" type="text" placeholder="message" />
         <Button type="submit">send</Button>
 
     </FormContainer>
