@@ -68,7 +68,7 @@ const Button = styled.button`
 `;
 
 const ContactForm = () => {
-  const [isSubmitted, setIsSubmitted] = useState(true);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleSubmit = event => {
     event.preventDefault();
