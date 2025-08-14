@@ -1,15 +1,44 @@
 import * as React from "react";
+import { graphql, useStaticQuery } from "gatsby";
+import { Transform } from "../utils/data";
+import { GatsbyImage } from "gatsby-plugin-image";
+import styled from "@emotion/styled";
 import Layout from "../components/layout/layout";
 import Jumbotron from "../components/jumbotron/jumbotron";
 import SEO from "../components/seo/seo";
 
+const ImageContainer = styled.div`
+  width: 100%;
+  height: 100%;  
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+`
+
+const StyledImage = styled(GatsbyImage)`
+  width: 40%;
+`
 
 
 const IndexPage = () => {
-
+  const item = Transform.homePageImage(
+    useStaticQuery(
+      graphql`
+        {
+          contentfulWebsite {
+            image {
+              gatsbyImageData
+            }
+          }
+        }
+      `
+    )
+  );
   return (
-    <Layout withSideBar={false}>
-      <Jumbotron />
+    <Layout withSideBar={true}>
+      <ImageContainer>
+        <StyledImage objectFit="contain" image={item.gatsbyImageData} alt="Anja Ngozi" />
+      </ImageContainer>
     </Layout>
   );
 };
