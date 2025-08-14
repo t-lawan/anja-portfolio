@@ -168,7 +168,7 @@ const SideNavbar = () => {
     return (
       <>
         <NavbarItemsWrapper>
-          <StyledInternalLink activeClassName="is_active" to="/xyz">
+          <StyledInternalLink activeClassName="is_active" to="/">
             anja ngozi
           </StyledInternalLink>
           {navbarItems.map((item, index) => (
