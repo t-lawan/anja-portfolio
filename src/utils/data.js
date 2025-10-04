@@ -76,6 +76,18 @@ export class Transform {
       return data;
     }
 
+    static homePageWebsite(data){
+      // Get array
+      data = {
+        image: data.contentfulWebsite.image,
+        imageLink: data.contentfulWebsite.imageLink,
+        description: data.contentfulWebsite.description.description,
+        title: data.contentfulWebsite.title,
+        contact: data.contentfulWebsite.contact.contact
+      }
+      return data;
+    }   
+
     static featuredWork(data){
       // Get array
       data = data.contentfulWebsite.featuredWork;

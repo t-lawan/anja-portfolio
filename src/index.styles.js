@@ -71,7 +71,6 @@ const styles = css`
     animation: rainbow 200s linear infinite;
   }
   body {
-    cursor: url(${wave}), pointer;
     background: "white";
     background-image: url(${background});
     background-repeat: round;

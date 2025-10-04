@@ -1,5 +1,5 @@
 import * as React from "react";
-import { graphql, useStaticQuery } from "gatsby";
+import { graphql, Link, useStaticQuery } from "gatsby";
 import { Transform } from "../utils/data";
 import { GatsbyImage } from "gatsby-plugin-image";
 import styled from "@emotion/styled";
@@ -22,13 +22,31 @@ const StyledImage = styled(GatsbyImage)`
     }
 `
 
+const StyledLink = styled(Link)`
+  width: 100%;
+    display: flex;
+  justify-content: center; 
+  align-items: center;
+`
 
-const IndexPage = () => {
-  const item = Transform.homePageImage(
+// Extract the query into a reusable hook
+export const useWebsiteData = () => {
+  return Transform.homePageWebsite(
     useStaticQuery(
       graphql`
         {
           contentfulWebsite {
+          title
+          description {
+            description
+          }
+          contact {
+            contact
+          }
+          image {
+            gatsbyImageData
+          }
+          imageLink
             image {
               gatsbyImageData
             }
@@ -37,10 +55,19 @@ const IndexPage = () => {
       `
     )
   );
+};
+
+
+const IndexPage = () => {
+  const website = useWebsiteData();
+
+  const IMAGE = <StyledImage objectFit="contain" image={website.image.gatsbyImageData} alt="Anja Ngozi" />
+
   return (
     <Layout withSideBar={true}>
       <ImageContainer>
-        <StyledImage objectFit="contain" image={item.gatsbyImageData} alt="Anja Ngozi" />
+        {website.imageLink ? (
+          <StyledLink target="__blank" to={website.imageLink}> {IMAGE}</StyledLink>) : (<>{IMAGE}</>)}
       </ImageContainer>
     </Layout>
   );
@@ -48,4 +75,13 @@ const IndexPage = () => {
 
 export default IndexPage;
 
-export const Head = () => <SEO title="Anja Ngozi" description="Anja Ngozi is a London based DJ, whose ecletic sets centre around soulful tunes, lo-fi beats and experimental waves."/>;
+
+export const Head = () => {
+  const website = useWebsiteData();
+
+  return (
+    <SEO
+      title={website.title}
+      description={website.description} />
+  );
+};
